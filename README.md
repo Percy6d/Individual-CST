@@ -1,3 +1,5 @@
-# learn-git
+# Github
+https://github.com/Percy6d/Individual-CST
 
-# Something new
+# Github Pages
+https://percy6d.github.io/Individual-CST/
