@@ -218,6 +218,64 @@
                     }
                     return availabilityArray.sort(compare);
                 },
+                filterLessons: function () {
+                    let sortLesson = this.lessons
+
+                    sortLesson = sortLesson.filter((lesson) => {
+                        return lesson.subject.toLowerCase().match(this.searchInput.toLowerCase()) 
+                        || lesson.location.toLowerCase().match(this.searchInput.toLowerCase())
+                    })
+                    if (this.sortBy == 'subject') {
+                        sortLesson = this.sortBySubject(sortLesson)
+                    }
+                    else if (this.sortBy == 'location') {
+                        sortLesson = this.sortByLocation(sortLesson)
+                    }
+                    else if (this.sortBy == 'price') {
+                        sortLesson = this.sortByLocation(sortLesson)
+                    }
+                    else if (this.sortBy == 'availability') {
+                        sortLesson = this.sortByAvailibility(sortLesson)
+                    }
+
+                    if (this.progress == 'Ascending') {
+                        return sortLesson
+                    }
+                    else if (this.progress == 'Descending') {
+                        return sortLesson.reverse()
+                    }
+                    return sortLesson
+                }
+            },
+            computed:{
+                letterValid(name){
+                    let letters = /^[A-Za-z]+$/
+                    if (letters.test(this.name)){
+                        return true
+                    }
+                    else{
+                        return false
+
+                    }
+                },
+                numberValid(number){
+                    let numbers = /^[0-9]+$/
+                    if (numbers.test(this.number)){
+                        return true
+                    }
+                    else{
+                        return false
+
+                     }
+                },
+                cartItemCount: function () {
+                    return this.cart.length || '';
+                },
+                
             }
-    })
+        })
     </script>
+
+</body>
+
+</html>
