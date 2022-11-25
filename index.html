@@ -15,6 +15,21 @@
 
 </head>
 
+<body>
+    <div id="app">
+        <div class="main-container">
+            <h1 v-text="sitename"></h1>
+            <button class="cartBtn" v-if="cart < 1" disabled>
+                <span class="fas fa-shopping-cart"></span>
+                Shopping Cart {{cartItemCount}}
+              </button>
+            <button class="cartButton" v-else v-on:click="toggleShowProduct">
+                <span class="fas fa-shopping-cart"></span>
+                Shopping Cart {{cartItemCount}}
+              </button>
+        </div>
+    </div>
+
 
 
 
