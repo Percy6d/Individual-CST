@@ -136,5 +136,33 @@
                     number: ''
                     
             },
+            methods: {
+                canAddToCart(lesson) {
+                    return lesson.space > this.cartCount(lesson.id);;
+                },
+                submitCheckout() {
+                    alert('Order has been Submitted!');
+                },
+                addToCart(lesson) {
+                    lesson.space -= 1
+                    this.cart.push(lesson)
+                    console.log(this.cart)
+                },
+                removeItem(event, id) {
+                    let idx;
+                    let [lesson, index] = this.lessons.filter((j, index) => {
+                    if (j.id == id) {
+                        idx = index;
+                        return j;
+                       }
+                    });
+
+                    this.lessons[idx].space += 1;
+                    this.cart.pop(lesson.id);
+                },
+                toggleShowProduct() {
+                    this.showProduct = this.showProduct ? false : true;
+                },
+            }
     })
     </script>
