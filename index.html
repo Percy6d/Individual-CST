@@ -46,7 +46,7 @@
                         </p>
                         <div class="arrangement">
                         <p>
-                            <input type="radio" value="Ascending" id="ascending" v-model="progress" checked>
+                            <input type="radio" value="Ascending" id="ascending" v-model="progress">
                             <label for="ascending">Ascending</label>
                         </p>
                         <p>
@@ -86,14 +86,14 @@
                     <div class="details">
                         <div class="name">
                             <p><strong>Name </strong></p>
-                            <input id="name" type="text" v-model.trim="name" />
+                            <input id="name" type="text" v-model.trim="name"/>
                         </div>
                         <div class="number">
                             <p><strong>Number </strong></p>
                             <input id="number" v-model.trim="number" type="number"/>
                         </div>
         
-                        <button v-if="letterValid && numberValid" v-on:click="submitCheckout">
+                        <button v-if="letterRegex && numberRegex" v-on:click="submitCheckout">
                             Checkout
                         </button>
                         <button v-else disabled="disabled">Checkout</button>
@@ -244,7 +244,7 @@
                 }
             },
             computed:{
-                letterValid(name){
+                letterRegex(name){
                     let letters = /^[A-Za-z]+$/
                     if (letters.test(this.name)){
                         return true
@@ -254,7 +254,7 @@
 
                     }
                 },
-                numberValid(number){
+                numberRegex(number){
                     let numbers = /^[0-9]+$/
                     if (numbers.test(this.number)){
                         return true
