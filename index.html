@@ -93,7 +93,20 @@
                             </button>
                             <button v-else disabled="disabled">Checkout</button>
                         </div>
+                        <section class="paragraph" v-for="lesson in cart" :key="lesson.id">
+                            <p class="subject">Subject: {{lesson.subject}}</p>
+                            <p class="location">Location: {{lesson.location}}</p>
+                            <p class="price">Price: &#163{{lesson.price}}</p>
+                            <img class="image" :src="lesson.img" alt="" />
+                            <p class="quantity">Quantity: {{lesson.quantity}}</p>
+                            <button class="add" @click="removeItem($event,lesson.id)">Remove</button>
+                        </section>
+                    </main>
         
+                </div>
+    
+            </div>    
+        </div>
     
 
 
