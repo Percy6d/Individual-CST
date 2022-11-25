@@ -27,7 +27,8 @@
                 <span class="fas fa-shopping-cart"></span>
                 Shopping Cart {{cartItemCount}}
               </button>
-              <div v-if="showProduct">
+        
+            <div v-if="showProduct">
                 <main>
                     <input type="text" v-model="searchInput" placeholder="Search">
                             
@@ -41,72 +42,78 @@
                                 <option value="price">Price</option>
                                 <option value="availability">Avalibility</option>
                             </select>
+                            
                         </p>
                         <div class="arrangement">
-                            <p>
-                                <input type="radio" value="Ascending" id="ascending" v-model="progress" checked>
-                                <label for="ascending">Ascending</label>
-                            </p>
-                            <p>
-                                <input type="radio" value="Descending" id="descending" v-model="progress">
-                                <label for="descending">Descending</label>
-                            </p>
-                            </div>
+                        <p>
+                            <input type="radio" value="Ascending" id="ascending" v-model="progress" checked>
+                            <label for="ascending">Ascending</label>
+                        </p>
+                        <p>
+                            <input type="radio" value="Descending" id="descending" v-model="progress">
+                            <label for="descending">Descending</label>
+                        </p>
                         </div>
+                    </div>
 
-                        <main class="container">
-                            <section class="paragraph" v-for="lesson in filterLessons()" :key="lesson.id">
-                                <p class="subject" >Subject: {{lesson.subject}}</p>
-                                <p class="location" >Location: {{lesson.location}}</p>
-                                <p class="price">Price: &#163 {{lesson.price}}</p>
-                                <p class="space">Spaces: {{lesson.space}}</p>
-                                <img class="image" :src="lesson.img" alt="" /> 
-                                <button class="add" v-on:click="addToCart(lesson)" v-if="canAddToCart" :disabled="lesson.space < 1">
-                                <span class="fas fa-shopping-cart" ></span> Add to Cart</button>  
-                                <button class="add" disabled="disabled" v-else> Add to Cart </button>
-                            </section> 
-                        </main>
-    
-                            <div v-if="filterLessons() == ''">
-                                <div>
-                                    <p><strong>{{searchInput}}</strong> Search not found</p>
-                                </div>
-                            </div>
-                    </main>
-                </div>
-                <div v-else>
-                    <h1>Shopping Cart</h1>
-                    <button class="cartButton" v-if="cart==0" v-on:click="toggleShowProduct">Back</button>
+
                     <main class="container">
-                        <div class="details">
-                            <div class="name">
-                                <p><strong>Name </strong></p>
-                                <input id="name" type="text" v-model.trim="name" />
-                            </div>
-                            <div class="number">
-                                <p><strong>Number </strong></p>
-                                <input id="number" v-model.trim="number" type="number"/>
-                            </div>
-            
-                            <button v-if="letterValid && numberValid" v-on:click="submitCheckout">
-                                Checkout
-                            </button>
-                            <button v-else disabled="disabled">Checkout</button>
-                        </div>
-                        <section class="paragraph" v-for="lesson in cart" :key="lesson.id">
-                            <p class="subject">Subject: {{lesson.subject}}</p>
-                            <p class="location">Location: {{lesson.location}}</p>
-                            <p class="price">Price: &#163{{lesson.price}}</p>
-                            <img class="image" :src="lesson.img" alt="" />
-                            <p class="quantity">Quantity: {{lesson.quantity}}</p>
-                            <button class="add" @click="removeItem($event,lesson.id)">Remove</button>
-                        </section>
+                        <section class="paragraph" v-for="lesson in filterLessons()" :key="lesson.id">
+                            <p class="subject" >Subject: {{lesson.subject}}</p>
+                            <p class="location" >Location: {{lesson.location}}</p>
+                            <p class="price">Price: &#163 {{lesson.price}}</p>
+                            <p class="space">Spaces: {{lesson.space}}</p>
+                            <img class="image" :src="lesson.img" alt="" /> 
+                            <button class="add" v-on:click="addToCart(lesson)" v-if="canAddToCart" :disabled="lesson.space < 1">
+                            <span class="fas fa-shopping-cart" ></span> Add to Cart</button>  
+                            <button class="add" disabled="disabled" v-else> Add to Cart </button>
+                        </section> 
                     </main>
+
+                        <div v-if="filterLessons() == ''">
+                            <div>
+                                <p><strong>{{searchInput}}</strong> Search not found</p>
+                            </div>
+                        </div>
+                </main>
+            </div>
+
+
+            <div v-else>
+                <h1>Shopping Cart</h1>
+                <button class="cartButton" v-if="cart==0" v-on:click="toggleShowProduct">Back</button>
+                <main class="container">
+                    <div class="details">
+                        <div class="name">
+                            <p><strong>Name </strong></p>
+                            <input id="name" type="text" v-model.trim="name" />
+                        </div>
+                        <div class="number">
+                            <p><strong>Number </strong></p>
+                            <input id="number" v-model.trim="number" type="number"/>
+                        </div>
         
-                </div>
+                        <button v-if="letterValid && numberValid" v-on:click="submitCheckout">
+                            Checkout
+                        </button>
+                        <button v-else disabled="disabled">Checkout</button>
+                    </div>
+
+                    <section class="paragraph" v-for="lesson in cart" :key="lesson.id">
+                        <p class="subject">Subject: {{lesson.subject}}</p>
+                        <p class="location">Location: {{lesson.location}}</p>
+                        <p class="price">Price: &#163{{lesson.price}}</p>
+                        <img class="image" :src="lesson.img" alt="" />
+                        <p class="quantity">Quantity: {{lesson.quantity}}</p>
+                        <button class="add" @click="removeItem($event,lesson.id)">Remove</button>
+                    </section>
+                </main>
     
-            </div>    
-        </div>
+            </div>
+
+        </div>    
+    </div>
+       
     
 
 
@@ -114,20 +121,20 @@
 
 
 
-<script type="text/javascript">
-    let  createApp = new Vue({
-        el: '#app',
-        data: {
-                sitename: 'Lesson Hub',
-                lessons: lessons,
-                showProduct: true,
-                cart: [],
-                sortBy: 'Sort',
-                progress: 'ascending',
-                searchInput: '',
-                name: '',
-                number: ''
-                
-        }
+    <script type="text/javascript">
+        let  createApp = new Vue({
+            el: '#app',
+            data: {
+                    sitename: 'Lesson Hub',
+                    lessons: lessons,
+                    showProduct: true,
+                    cart: [],
+                    sortBy: 'Sort',
+                    progress: 'ascending',
+                    searchInput: '',
+                    name: '',
+                    number: ''
+                    
+            },
     })
     </script>
