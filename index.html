@@ -27,6 +27,24 @@
                 <span class="fas fa-shopping-cart"></span>
                 Shopping Cart {{cartItemCount}}
               </button>
+              <div v-if="showProduct">
+                <main>
+                    <input type="text" v-model="searchInput" placeholder="Search">
+                            
+                    <div>
+                        <p>Sort by</p>
+                        <p>
+                            <select name="sortBy" v-model="sortBy" >
+                                <option>Sort</option>
+                                <option value="subject">Subject</option>
+                                <option value="location">Location</option>
+                                <option value="price">Price</option>
+                                <option value="availability">Avalibility</option>
+                            </select>
+                        </p>
+                    </div>
+                </main>
+              </div>
         </div>
     </div>
 
