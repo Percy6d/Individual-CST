@@ -205,9 +205,9 @@
                 },
                 sortByAvailability: function (availabilityArray) {
                     function compare(a, b) {
-                        if (a.stock > b.stock)
+                        if (a.space > b.space)
                             return 1;
-                        if (a.stock < b.stock)
+                        if (a.space < b.space)
                             return -1;
                         return 0;
                     }
@@ -219,6 +219,7 @@
                     sortLesson = sortLesson.filter((lesson) => {
                         return lesson.subject.toLowerCase().match(this.searchInput.toLowerCase()) 
                         || lesson.location.toLowerCase().match(this.searchInput.toLowerCase())
+                    
                     })
                     if (this.sortBy == 'subject') {
                         sortLesson = this.sortBySubject(sortLesson)
